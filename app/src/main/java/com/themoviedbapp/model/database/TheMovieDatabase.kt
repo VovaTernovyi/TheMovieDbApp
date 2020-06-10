@@ -2,15 +2,17 @@ package com.themoviedbapp.model.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.themoviedbapp.model.entity.BridgeMovieGenre
+import androidx.room.TypeConverters
 import com.themoviedbapp.model.entity.Genre
+import com.themoviedbapp.model.entity.GenreIdListConverter
 import com.themoviedbapp.model.entity.Movie
 
 @Database(
-    entities = [Movie::class, Genre::class, BridgeMovieGenre::class],
+    entities = [Movie::class, Genre::class],
     version = TheMovieDatabase.DATABASE_VERSION,
     exportSchema = TheMovieDatabase.EXPORT_SCHEMA
 )
+@TypeConverters(GenreIdListConverter::class)
 abstract class TheMovieDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
