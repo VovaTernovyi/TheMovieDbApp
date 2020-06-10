@@ -19,6 +19,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        viewModel.downloadAndSaveGenresLiveData.observe(this, Observer { response ->
+            response.onError { _, _ ->
+                Log.e("ERROR: ", "Download genres")
+            }
+        })
         viewModel.downloadAndSaveMoviesLiveData.observe(this, Observer { response ->
             response.onError { _, _ ->
                 Log.e("ERROR: ", "Download movies")
@@ -30,4 +35,5 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         viewModel.refreshMovies()
     }
+
 }

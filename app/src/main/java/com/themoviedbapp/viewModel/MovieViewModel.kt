@@ -10,12 +10,16 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel(), Koi
 
     private val refreshMoviesLiveData = SingleLiveEvent<Unit>()
 
-//    val movieLiveData = Transformations.switchMap(refreshMoviesLiveData) {
-//        repository.
-//    }
-
     val downloadAndSaveMoviesLiveData = Transformations.switchMap(refreshMoviesLiveData) {
         repository.downloadAndSavePopularMovies()
+    }
+
+    val downloadAndSaveGenresLiveData = Transformations.switchMap(refreshMoviesLiveData) {
+        repository.downloadAndSaveGenres()
+    }
+
+    val getPopularMoviesLiveData = Transformations.switchMap(refreshMoviesLiveData) {
+        repository.getPopularMovies(28)
     }
 
     fun refreshMovies() {

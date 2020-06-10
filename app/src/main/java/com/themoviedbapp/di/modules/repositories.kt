@@ -5,5 +5,5 @@ import com.themoviedbapp.model.repository.MovieRepositoryImpl
 import org.koin.dsl.module
 
 val KoinRepositoriesModule = module {
-    single<MovieRepository> { MovieRepositoryImpl(get()) }
+    single<MovieRepository> { MovieRepositoryImpl(get(), get(), get(), get()) }
 }

@@ -4,6 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
 import com.themoviedbapp.BuildConfig
 import com.themoviedbapp.extension.onNotReleaseBuild
+import com.themoviedbapp.model.network.contract.GenreContract
 import com.themoviedbapp.model.network.contract.MovieContract
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -19,9 +20,12 @@ val KoinApiModule = module {
     single { getRetrofit(get()) }
 
     factory { provideMovie(get()) }
+    factory { provideGenre(get()) }
 }
 
 fun provideMovie(retrofit: Retrofit): MovieContract = retrofit.create(MovieContract::class.java)
+
+fun provideGenre(retrofit: Retrofit): GenreContract = retrofit.create(GenreContract::class.java)
 
 fun getOkHttpClient(): OkHttpClient =
     with(OkHttpClient.Builder()) {
